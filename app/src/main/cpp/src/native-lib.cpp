@@ -1,4 +1,4 @@
-/*静态注册*/
+/*静态注册 SampleActivity*/
 
 
 #include <jni.h>

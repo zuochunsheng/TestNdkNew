@@ -1,12 +1,19 @@
-# For more information about using CMake with Android Studio, read the
-# documentation: https://d.android.com/studio/projects/add-native-code.html
 
-# Sets the minimum version of CMake required to build the native library.
 # 限定cmake支持最低版本
 cmake_minimum_required(VERSION 3.4.1)
 
 # 指定so生成到libs目录
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/${ANDROID_ABI})
+# app/libs/armeabi-v7a/libnative-lib.so
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/${ANDROID_ABI})
+# app/obj/local/armeabi-v7a/libnative-lib.so
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/obj/local/${ANDROID_ABI})
+
+# 指定包含的头文件路径
+include_directories(src/main/cpp/inc)
+
+# 搜索自动目录下的所有源代码文件，并存储在 SRC_LIST 变量中
+aux_source_directory(src/main/cpp/src SRC_LIST )
+
 
 #设置日志
 IF (${CMAKE_HOST_SYSTEM_NAME} MATCHES "Windows")
@@ -36,8 +43,9 @@ add_library( # Sets the name of the library.
 
              # Provides a relative path to your source file(s).
             # 资源文件的路径，可以是多个资源文件
-              src/main/cpp/src/native-lib.cpp )
+             # src/main/cpp/src/native-lib.cpp )
              # src/main/cpp/src/native-lib1.cpp )
+               ${SRC_LIST} )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
