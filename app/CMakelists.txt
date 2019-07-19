@@ -47,6 +47,17 @@ add_library( # Sets the name of the library.
              # src/main/cpp/src/native-lib1.cpp )
                ${SRC_LIST} )
 
+#add_library(# Sets the name of the library.
+#        native-test
+#
+#        # Sets the library as a shared library.
+#        SHARED
+#
+#        # Provides a relative path to your source file(s).
+#        src/main/cpp/src/native-test.cpp )
+
+
+
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library
@@ -72,7 +83,7 @@ find_library( # Sets the name of the path variable.
 target_link_libraries( # Specifies the target library.
                        # 目标库
                        native-lib
-
+                       #native-test
                         # 加上下面这一行
                         jnigraphics
 

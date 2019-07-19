@@ -18,6 +18,7 @@ public class SampleActivity extends Activity {
 
     static {
         System.loadLibrary("native-lib");
+        //System.loadLibrary("native-test");
     }
 
     @Override
@@ -25,32 +26,37 @@ public class SampleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
 
-        Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-        bitmap.eraseColor(0xff336699); // AARRGGBB
-        byte[] bytes = new byte[bitmap.getWidth() * bitmap.getHeight() * 4];
-        Buffer dst = ByteBuffer.wrap(bytes);
-        bitmap.copyPixelsToBuffer(dst);
-        // ARGB_8888 真实的存储顺序是 R-G-B-A
-        Log.d(TAG, "R: " + Integer.toHexString(bytes[0] & 0xff));
-        Log.d(TAG, "G: " + Integer.toHexString(bytes[1] & 0xff));
-        Log.d(TAG, "B: " + Integer.toHexString(bytes[2] & 0xff));
-        Log.d(TAG, "A: " + Integer.toHexString(bytes[3] & 0xff));
-        passBitmap(bitmap);
+//        Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+//        bitmap.eraseColor(0xff336699); // AARRGGBB
+//        byte[] bytes = new byte[bitmap.getWidth() * bitmap.getHeight() * 4];
+//        Buffer dst = ByteBuffer.wrap(bytes);
+//        bitmap.copyPixelsToBuffer(dst);
+//        // ARGB_8888 真实的存储顺序是 R-G-B-A
+//        Log.d(TAG, "R: " + Integer.toHexString(bytes[0] & 0xff));
+//        Log.d(TAG, "G: " + Integer.toHexString(bytes[1] & 0xff));
+//        Log.d(TAG, "B: " + Integer.toHexString(bytes[2] & 0xff));
+//        Log.d(TAG, "A: " + Integer.toHexString(bytes[3] & 0xff));
+//        passBitmap(bitmap);
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
+        //tv.setText(stringFromJNITest());
 
 
-        test();
+       // test();
     }
 
-    public native void passBitmap(Bitmap bitmap); // 传递一个 Bitmap 给 NDK
+    //public native void passBitmap(Bitmap bitmap); // 传递一个 Bitmap 给 NDK
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      */
     public native String stringFromJNI();
 
-    public native void test();
+
+    //public native void test();
+
+    //打多个so 库的尝试
+    //public native String stringFromJNITest();
 }
