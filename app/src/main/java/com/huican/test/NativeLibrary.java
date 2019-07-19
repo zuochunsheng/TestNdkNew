@@ -18,3 +18,4 @@ public class NativeLibrary {
     public static native void transferDataToNative(DataBean dataBean);
 
 }
+
